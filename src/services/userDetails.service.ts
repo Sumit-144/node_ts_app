@@ -4,6 +4,8 @@ import type { UserDetailsInput } from "../validations/userDetails.validation";
 import type { UserDetails } from "../generated/prisma";
 // Import user details repository functions
 import * as userDetailsRepo from "../repositories/userDetails.repo";
+// Import utility functions for computing age and BMI
+import { computeAge, computeBMI } from "../utils/compute_metrics";
 
 /**
  * Upsert user details: create if not exists, update if exists.
@@ -14,9 +16,16 @@ import * as userDetailsRepo from "../repositories/userDetails.repo";
 export async function upsertUserDetails(
   userId: number,
   details: UserDetailsInput 
-): Promise<UserDetails> {
+): Promise<UserDetails & { age : string , bmi : number }> {
+  
   // Delegate to repository function
-  const record = userDetailsRepo.upsertUserDetails(userId, details);
+  const record = await userDetailsRepo.upsertUserDetails(userId, details);
 
-  // 
+  return {
+    ...record,
+    // Compute age from date of birth
+    age: computeAge(details.dob),
+    // Compute BMI from height and weight
+    bmi: computeBMI(details.height, details.weight),
+  };
 }

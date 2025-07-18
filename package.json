@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,9 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "pg": "^8.16.3",
+    "pino": "^9.7.0",
+    "pino-http": "^10.5.0",
+    "pino-pretty": "^13.0.0",
     "zod": "^4.0.5"
   },
   "devDependencies": {
@@ -24,6 +28,7 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.14",
     "@types/pg": "^8.15.4",
+    "@types/pino": "^7.0.4",
     "prisma": "^6.11.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"

@@ -5,16 +5,18 @@ import { Router } from "express";
 import * as userDetailsController from "../controllers/userDetails.controller";
 
 // Import validation schemas
-import { validate } from "../middlewares/validate";
+import { validateBody, validateParams } from "../middlewares/validate";
 import { userDetailsSchema } from "../validations/userDetails.validation";
+// Import user URL parameter schema
+import { userIdParamSchema } from "../validations/user.validation";
 
 // Import authentication middleware
-import { authenticateJwt } from "../middlewares/auth";
+//import { authenticateJwt } from "../middlewares/auth";
 
 // Create a new router instance
 const router = Router();
 
 // Define the routes for user details operations
-router.post("/", authenticateJwt, validate(userDetailsSchema), userDetailsController.upsertAndCompute); // Route to create user details
+router.post("/:id", validateParams(userIdParamSchema), validateBody(userDetailsSchema), userDetailsController.upsertUserDetails); // Route to create user details
 
 export default router;

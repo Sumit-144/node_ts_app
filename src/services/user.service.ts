@@ -4,6 +4,8 @@ import type { UserCreateInput, UserUpdateInput } from "../validations/user.valid
 import type { User } from "../generated/prisma";
 import bcrypt from "bcrypt";
 import * as repo from "../repositories/user.repo";
+// Import the logger instance
+import { logger } from "../utils/logger";
 
 /**
  * Create a new user with hashed password.
@@ -11,9 +13,12 @@ import * as repo from "../repositories/user.repo";
 export async function userCreate(
   data: UserCreateInput
 ): Promise<User> {
+  logger.info("Creating user with data from service: ", data);
   // 1) Hash the password
+  logger.debug("Hashing password for user creation");
   const hashed = await bcrypt.hash(data.password, 10);
   // 2) Delegate to repository
+  logger.debug("Calling repository to create user with hashed password");
   return repo.createRawUser({
     ...data,
     password: hashed,

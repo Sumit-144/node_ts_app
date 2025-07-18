@@ -5,12 +5,20 @@ import * as userService from "../services/user.service";
 // Import the validation schemas
 import type { UserCreateInput, UserUpdateInput, UserIdParam } from "../validations/user.validation";
 
+// Import the logger instance
+import { logger } from "../utils/logger";
+
 // Controller function to create a new user
 export const createUser = async (req: Request<{}, {}, UserCreateInput>, res: Response) => {
+    logger.info("Creating a new user with data: ", req.body);
+    // Call the user service to create a new user
+    logger.debug("Calling userService.userCreate with body: ", req.body);
     try {
         const user = await userService.userCreate(req.body);
+        logger.info("User created successfully: ", user);
         res.status(201).json(user);
     } catch (error) {
+        logger.error("Error creating user: ", error);
         res.status(500).json({ error: "Failed to create user" });
     }
 }

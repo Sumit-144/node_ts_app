@@ -12,10 +12,14 @@ import prisma from "../config/prisma";
 import type { UserCreateInput, UserUpdateInput } from "../validations/user.validation";
 import type { User } from "../generated/prisma";
 
+// Import the logger instance
+import { logger } from "../utils/logger";
+
 /**
  * Create a new user record (without hashing).
  */
 export function createRawUser(data: UserCreateInput): Promise<User> {
+  logger.info("Creating user with data from repository: ", data);
   return prisma.user.create({ data });
 }
 

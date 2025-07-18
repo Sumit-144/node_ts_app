@@ -2,21 +2,16 @@
 import { parse, intervalToDuration } from "date-fns";
 
 // Function to compute age from date of birth
-export function computeAge(dob: string): {
-  years: number;
-  months: number;
-  days: number;
-} {
-  const birthDate = parse(dob, "dd-MM-yyyy", new Date());
+export function computeAge(dob: Date): string {
   const today = new Date();
 
-  const duration = intervalToDuration({ start: birthDate, end: today });
+  const duration = intervalToDuration({ start: dob, end: today });
 
-  return {
-    years: duration.years ?? 0,
-    months: duration.months ?? 0,
-    days: duration.days ?? 0,
-  };
+  const years = duration.years ?? 0;
+  const months = duration.months ?? 0;
+  const days = duration.days ?? 0;
+
+  return `${years} year${years !== 1 ? "s" : ""}, ${months} month${months !== 1 ? "s" : ""}, ${days} day${days !== 1 ? "s" : ""}`;
 }
 
 // Function to compute BMI from height (in cm) and weight (in kg)

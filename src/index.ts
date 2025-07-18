@@ -4,6 +4,13 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.routes";
 import userDetailsRoutes from "./routes/userDetails.routes";
 
+// Import the logger instance
+import { logger } from "./utils/logger";
+
+// Import pino-http for logging HTTP requests
+import pinoHttp from "pino-http";
+
+
 // Initialize dotenv to load environment variables
 dotenv.config();
 
@@ -12,6 +19,9 @@ const app = express();
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
+// Setup pino-http for logging HTTP requests
+app.use(pinoHttp({ logger }));
+  
 // Use the user routes for handling user-related requests
 app.use("/api/users", userRoutes);
 // Use the user details routes for handling user details-related requests
