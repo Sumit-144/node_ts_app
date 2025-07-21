@@ -56,3 +56,10 @@ export function findRawUserById(id: number): Promise<User | null> {
 export function deleteRawUser(id: number): Promise<User> {
   return prisma.user.delete({ where: { id } });
 }
+
+/**
+ * Find a user by email.
+ */
+export function findRawUserByEmail(email: string): Promise<User | null> {
+  return prisma.user.findUnique({ where: { email } });
+}

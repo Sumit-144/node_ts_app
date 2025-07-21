@@ -8,7 +8,7 @@ import type { UserCreateInput, UserUpdateInput, UserIdParam } from "../validatio
 // Import the logger instance
 import { logger } from "../utils/logger";
 
-// Controller function to create a new user
+// Controller function to create a new user (Not in use)
 export const createUser = async (req: Request<{}, {}, UserCreateInput>, res: Response) => {
     logger.info("Creating a new user with data: ", req.body);
     // Call the user service to create a new user
