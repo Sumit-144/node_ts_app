@@ -64,7 +64,7 @@ router.delete(
 
 // User Details (upsert)
 router.post(
-  "/:id/details",
+  "/:id/get_age_and_bmi",
   validateParams(userIdParamSchema),
   authorize(["user", "admin"]),
   ownershipGuard,

@@ -51,7 +51,7 @@ All protected endpoints require a JWT Bearer token in the `Authorization` header
 ### 🔐 Authentication
 
 #### Sign Up
-Creates a new user account and returns an access token valid for 1 hour.
+Creates a new user account and returns an access token valid for 1 hour. Once signed in you have successfully logged in and ready to compute your health metrics like age and BMI.
 
 - **Endpoint:** `POST /`
 - **Authentication:** Not required
@@ -92,7 +92,7 @@ Authenticates an existing user and returns a fresh access token.
 #### Calculate BMI & Age
 Computes and returns the user's BMI and current age based on provided details.
 
-- **Endpoint:** `POST /:userId/details`
+- **Endpoint:** `POST /:userId/get_age_and_bmi`
 - **Authentication:** Required 🔒
 
 **Path Parameters:**
