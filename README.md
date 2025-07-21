@@ -25,7 +25,7 @@
   - Sessions expire after **1 hour**—you’ll need to re‑authenticate to continue.
 
 - 📊 **Health Endpoint**  
-  - Authenticated users can call `POST /:userId/details` to calculate and retrieve their **BMI** & **Age**.
+  - Authenticated users can call `POST /:userId/get_age_and_bmi` to calculate and retrieve their **BMI** & **Age**.
 
 
 
